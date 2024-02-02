@@ -3,3 +3,5 @@
 1. basic simple example of randomly selecting from hardcoded lists / deployed to publicly accessible URL (DONE)
 2. Be able to edit the lists in the app (maybe an admin page) 
 3. improve design and maybe show "example" image for each type of throw? (change this to whatever you think makes sense)
+
+4. 
