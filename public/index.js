@@ -1,8 +1,8 @@
 function printRandomItem() {
 
-    var listItems = document.getElementById('discList').getElementsByTagName('li');
+    var listItems = ['putter', 'driver', 'mid']
     var randomIndex = Math.floor(Math.random() * listItems.length);
-    var randomDiscType = listItems[randomIndex].textContent;
+    var randomDiscType = listItems[randomIndex];
 
     var listItems = document.getElementById('throwList').getElementsByTagName('li');
     var randomIndex = Math.floor(Math.random() * listItems.length);

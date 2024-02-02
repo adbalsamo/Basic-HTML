@@ -19,26 +19,6 @@
             }
         </style>
 
-        <ul class="off-screen" id="discList">
-            <li>Putter</li>
-            <li>Midrange</li>
-            <li>Driver</li>
-            <li>Stable</li>
-            <li>Flippy</li>
-            <li>Wild</li>
-        </ul>
-
-        <ul class="off-screen" id="throwList">
-            <li>Backhand</li>
-            <li>Forehand</li>
-            <li>Roller</li>
-            <li>Hyzer</li>
-            <li>Anhyzer</li>
-            <li>Wild</li>
-
-        </ul>
-
-        <script src="index.js"></script>
 
         <button onclick="printRandomItem()">Roll Dice</button>
 
@@ -60,6 +40,8 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -78,6 +60,48 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        const discsCollection = collection(db, "discs");
+
+        const querySnapshot = await getDocs(discsCollection);
+
+
+
+
+
+
+        const discs = []//['Putter', 'Midrange', 'Driver', 'Stable', 'Flippy', 'Wild'];
+        const throws = ['Backhand', 'Forehand', 'Roller', 'Hyzer', 'Anhyzer', 'Wild'];
+
+        querySnapshot.forEach((doc) => {
+            // console.log(doc.id, doc.data());
+            const aDisc = doc.data();
+            console.log(aDisc);
+            discs.push(aDisc.name);
+        });
+
+
+
+
+        console.log('Lists:');
+        console.log(discs);
+        console.log(throws);
+
+        function printRandomItem() {
+
+            const randomIndex1 = Math.floor(Math.random() * discs.length);
+            const randomDiscType = discs[randomIndex1];
+
+            const randomIndex = Math.floor(Math.random() * throws.length);
+            const randomThrowType = throws[randomIndex];
+
+            document.getElementById('randomDiscDisplay').innerText = "Disc Type: " + randomDiscType;
+            document.getElementById('randomThrowDisplay').innerText = "Throw Type: " + randomThrowType;
+        }
+
+        window.printRandomItem = printRandomItem;
+
     </script>
 </body>
 
